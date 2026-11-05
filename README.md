@@ -39,3 +39,49 @@ Current public contact email: fuls2172004@gmail.com. Replace this later if you c
 - PNG output is lossless; the quality slider applies to JPG and WebP only.
 - Large images can use substantial device memory.
 - This static site has no backend, account system, analytics, or server-side contact form.
+
+## Additional browser-side tools
+
+- CSV / JSON Converter
+- HEX Color Picker
+- CSS Gradient Generator
+- Text Sorter and Deduplicator
+- HTML Preview (sandboxed)
+- Markdown Preview (safe basic renderer)
+
+These tools run locally in the browser and do not require a paid API.
+
+
+## PDF tools (added November 2026)
+- PDF Merger: combine multiple PDFs.
+- PDF Splitter: extract selected pages and ranges.
+- PDF to JPG: render pages and download individual images or a ZIP.
+- JPG to PDF: create a PDF from JPG, PNG, or WebP images.
+
+PDF tools run in the browser and load pdf-lib, PDF.js, and JSZip from public CDNs. An internet connection is required. Large documents may use significant device memory. Password-protected or malformed PDFs may not work.
+
+
+## PDF tools added
+- PDF Merger: combine multiple PDFs into one file.
+- PDF Splitter: extract selected pages or ranges.
+- PDF to JPG: render each PDF page as a downloadable JPG.
+- JPG to PDF: place multiple JPG/PNG images into a PDF.
+
+These PDF tools process documents in the browser. They load PDF libraries from public CDNs, so an internet connection is required for the PDF library to load. Documents are not uploaded to a ToolNest server by these tools.
+
+
+## Additional tools batch
+Added 15 pages: PDF Editor, PDF to Word, Word to PDF, Background Remover (manual transparent eraser; AI removal requires an external service), Video Compressor, Image to Text OCR, Speech to Text, Audio to WAV Converter, Image Upscaler (interpolation, not AI), Invoice Generator, Resume Builder, Screenshot Editor, Favicon Generator, QR Code Scanner, and Meta Tag Generator.
+
+Some tools load open-source libraries from public CDNs and therefore require an internet connection. Browser support and output quality vary. PDF-to-Word extracts text and does not preserve complex layouts; Word-to-PDF uses the browser print dialog; speech recognition depends on browser support; background removal is manual rather than AI-powered.
+
+
+## Advanced usability update
+- Added a shared progressive-enhancement layer (`advanced.js`) to all HTML pages.
+- File upload areas support drag and drop and show selected file names and sizes.
+- Tool pages include Reset and Share controls.
+- Ctrl/Cmd + Enter triggers the primary action on tool pages.
+- Individual tool pages receive WebApplication structured data.
+- Added visible keyboard focus and mobile-friendly toolbar styling.
+- These are usability and discoverability improvements, not a claim that every tool has AI-grade capabilities.
+- Browser testing of every input/output combination is still required before AdSense submission.

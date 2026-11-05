@@ -1,0 +1,24 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="A simple focus timer with work and break sessions."><meta name="theme-color" content="#10111a"><title>Pomodoro Timer | ToolNest</title><link rel="stylesheet" href="styles.css"></head><body><header class="site-header"><a class="brand" href="index.html"><span class="brand-mark">T</span><span>Tool<span class="brand-accent">Nest</span></span></a><button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button><nav id="mainNav"><a href="index.html">Home</a><a href="contact.html">Contact</a><a href="privacy-policy.html">Privacy</a><a href="terms-of-use.html">Terms</a></nav><a class="header-cta" href="index.html#all-tools">All tools ↗</a></header><main class="tool-page active page-section"><a class="back-link" href="index.html#all-tools">← All tools</a><div class="tool-heading"><div class="eyebrow">PRODUCTIVITY TOOL</div><h1>Pomodoro Timer</h1><p>A simple focus timer with work and break sessions.</p></div><div class="utility-layout"><div class="utility-panel utility-center"><div class="utility-row"><div><label for="work">Focus minutes</label><input id="work" type="number" min="1" max="180" value="25"></div><div><label for="break">Break minutes</label><input id="break" type="number" min="1" max="60" value="5"></div></div><div id="mode" class="eyebrow">FOCUS SESSION</div><div id="clock" class="utility-big">25:00</div><div class="utility-actions" style="justify-content:center"><button class="button button-primary" id="start">Start</button><button class="button button-secondary" id="pause">Pause</button><button class="button button-quiet" id="reset">Reset</button></div><p id="status" class="utility-note">Set your session lengths and press Start.</p></div></div><section class="legal-copy" style="margin:28px auto 0"><h3>How it works</h3><p>This tool runs in your browser using built-in web technologies. Your input is processed on your device and is not sent to a ToolNest processing server.</p><h3>Frequently asked questions</h3><p><strong>Is it free?</strong> Yes. There is no paid API or subscription required.</p><p><strong>Do I need an account?</strong> No account is needed to use this tool.</p></section></main><footer class="site-footer"><div class="footer-top"><a class="brand" href="index.html"><span class="brand-mark">T</span><span>Tool<span class="brand-accent">Nest</span></span></a><p>Free browser-based tools for everyday tasks.</p></div><div class="footer-bottom"><span>© 2026 ToolNest</span><div><a href="contact.html">Contact</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-use.html">Terms of Use</a></div></div></footer><script>
+let remaining=1500, phase='work', timer=null;
+const clock=document.querySelector('#clock'), mode=document.querySelector('#mode'), status=document.querySelector('#status');
+function draw(){clock.textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0')}
+function reset(){clearInterval(timer);timer=null;phase='work';remaining=(Number(document.querySelector('#work').value)||25)*60;mode.textContent='FOCUS SESSION';status.textContent='Ready when you are.';draw()}
+document.querySelector('#start').onclick=()=>{
+ if(timer)return;
+ status.textContent='Timer is running. Keep focus.';
+ timer=setInterval(()=>{
+  remaining--;draw();
+  if(remaining<=0){
+   clearInterval(timer);timer=null;
+   if(phase==='work'){phase='break';remaining=(Number(document.querySelector('#break').value)||5)*60;mode.textContent='BREAK TIME';status.textContent='Focus session complete. Take a short break.'}
+   else{phase='work';remaining=(Number(document.querySelector('#work').value)||25)*60;mode.textContent='FOCUS SESSION';status.textContent='Break complete. Ready for another focus session.'}
+   draw();
+   if('Notification' in window && Notification.permission==='granted'){new Notification('ToolNest timer',{body:phase==='break'?'Time for a break.':'Break is over. Back to focus.'})}
+  }
+ },1000);
+};
+document.querySelector('#pause').onclick=()=>{clearInterval(timer);timer=null;status.textContent='Paused.'};
+document.querySelector('#reset').onclick=reset;
+document.querySelector('#work').onchange=()=>{if(phase==='work'&&!timer)reset()};
+reset();
+</script><script>document.getElementById('menuToggle')?.addEventListener('click',()=>document.getElementById('mainNav')?.classList.toggle('open'));</script><script src="advanced.js" defer></script></body></html>
